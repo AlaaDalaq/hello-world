@@ -21,24 +21,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// Endpoint to authenticate user
-app.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-
-  // Log the username and password received in the request body
-  console.log("Username:", username);
-  console.log("Password:", password);
-
-  const user = await User.findOne({ username });
-  if (!user) return res.status(400).json({ message: "User not found" });
-
-  // Compare the entered password with the hashed password in the database
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-  if (!isPasswordValid) return res.status(400).json({ message: "Invalid credentials" });
-
-  const token = jwt.sign({ userId: user._id }, "secretKey", { expiresIn: "1h" });
-  res.json({ token });
-});
+\\ TODO (Add the post function here)
 
 // Starting the server
 app.listen(5000, () => {
