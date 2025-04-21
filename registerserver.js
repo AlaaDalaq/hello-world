@@ -23,32 +23,7 @@ const userSchema = new mongoose.Schema({
 // Create User model
 const User = mongoose.model("User", userSchema);
 
-app.post("/register", async (req, res) => {
-  const { username, password } = req.body;
-
-  try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
-    }
-
-    // Hash the password before saving it to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create a new user with the hashed password
-    const newUser = new User({ username, password: hashedPassword });
-
-    // Save the new user to the database
-    await newUser.save();
-
-    // Send success response
-    res.status(201).json({ message: "User registered successfully!" });
-  } catch (err) {
-    console.error("Error during registration:", err);
-    res.status(500).json({ message: "Server error" });
-  }
-});
+\\ TODO (Add the post function here)
 
 // Root route for testing
 app.get("/", (req, res) => {
